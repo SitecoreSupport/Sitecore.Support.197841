@@ -43,13 +43,25 @@
     /// <returns>The <see cref="IServiceScope"/>.</returns>
     public static ISitecoreServiceLocatorScope GetScope(IServiceProvider serviceProvider)
     {
-      var httpContext = serviceProvider.GetService<HttpContextBase>();
+      var httpContext = TryGetScope(serviceProvider);
       if (httpContext == null)
       {
         return null;
       }
 
       return httpContext.Items[ScopeKey] as ISitecoreServiceLocatorScope;
+    }
+
+    private static HttpContextBase TryGetScope(IServiceProvider serviceProvider)
+    {
+      try
+      {
+        return serviceProvider.GetService<HttpContextBase>();
+      }
+      catch
+      {
+        return null;
+      }
     }
 
     /// <summary>Initializes a module and prepares it to handle requests.</summary>
