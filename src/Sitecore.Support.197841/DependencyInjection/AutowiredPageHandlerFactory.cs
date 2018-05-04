@@ -100,7 +100,7 @@
       var parameterInfos = constructor.GetParameters();
       if (parameterInfos.Length > 0)
       {
-        var resolvedParameters = parameterInfos.Select(x => this.ServiceProvider.GetService(x.ParameterType)).ToArray();
+        var resolvedParameters = parameterInfos.Select(x => ServiceLocator.ServiceProvider.GetService(x.ParameterType)).ToArray();
         constructor.Invoke(targetObject, resolvedParameters);
       }
     }
