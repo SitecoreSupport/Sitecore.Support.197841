@@ -12,7 +12,7 @@ namespace Sitecore.Support.DependencyInjection
       yield return new ServicesConfigurator(configuration);
       yield return new DefaultSitecoreServicesConfigurator();
       yield return new ConfiguratorsConfigurator(configuration);
-      yield return new ServicesScopeConfigurator();
+      yield return new Sitecore.Support.DependencyInjection.ServicesScopeConfigurator();
     }
   }
 }
