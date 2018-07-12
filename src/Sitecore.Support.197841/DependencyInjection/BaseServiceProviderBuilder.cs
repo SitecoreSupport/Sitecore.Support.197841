@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sitecore.Configuration;
 using Sitecore.DependencyInjection;
 
 namespace Sitecore.Support.DependencyInjection
@@ -7,9 +8,11 @@ namespace Sitecore.Support.DependencyInjection
   {
     public override IEnumerable<IServicesConfigurator> GetServicesConfigurators()
     {
-      foreach (IServicesConfigurator servicesConfigurator in base.GetServicesConfigurators())
-        yield return servicesConfigurator;
-      yield return (IServicesConfigurator)new Sitecore.Support.DependencyInjection.ServicesScopeConfigurator();
+      var configuration = ConfigReader.GetConfiguration();
+      yield return new ServicesConfigurator(configuration);
+      yield return new DefaultSitecoreServicesConfigurator();
+      yield return new ConfiguratorsConfigurator(configuration);
+      yield return new ServicesScopeConfigurator();
     }
   }
 }
