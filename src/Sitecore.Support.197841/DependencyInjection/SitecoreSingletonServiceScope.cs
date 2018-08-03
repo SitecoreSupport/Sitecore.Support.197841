@@ -17,7 +17,7 @@
     /// <summary>
     /// Get the service provider in scope
     /// </summary>
-    public IServiceProvider ServiceProvider
+    public virtual IServiceProvider ServiceProvider
     {
       get
       {
